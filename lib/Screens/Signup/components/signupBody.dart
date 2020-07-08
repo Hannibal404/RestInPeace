@@ -164,6 +164,14 @@ class _SignupBodyState extends State<SignupBody> {
                 _handleSignUp(_controllerEmail, _controllerPassword)
                     .then((FirebaseUser user) => print(user))
                     .catchError((e) => print(e));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return LoginScreen();
+                    },
+                  ),
+                );
               },
             ),
             SizedBox(height: size.height * 0.03),

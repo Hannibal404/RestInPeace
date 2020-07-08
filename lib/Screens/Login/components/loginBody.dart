@@ -12,6 +12,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import 'package:flutter_auth/Screens/Homepage.dart';
+
 enum AuthMethod {
   SIGN_IN,
 }
@@ -167,6 +169,14 @@ class _LoginBodyState extends State<LoginBody> {
                   "password": _controllerPassword,
                   "method": AuthMethod.SIGN_IN,
                 });
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return HomeScreen();
+                    },
+                  ),
+                );
               },
             ),
             SizedBox(height: size.height * 0.03),
