@@ -24,6 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
     volume: 0.8,
   );
   bool _isPlaying = false;
+  bool _isPaused = false;
 
   @override
   Widget build(BuildContext context) {
@@ -170,11 +171,14 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget getPlaceWidget2(imagePath) {
     return GestureDetector(
       onTap: () async {
-        if (_isPlaying) {
-          _isPlaying = false;
-          _player.stop();
+        if (_isPlaying && !_isPaused) {
+          _isPaused = true;
+          _player.pause();
           print("No");
           print(_isPlaying);
+        } else if (_isPlaying && _isPaused) {
+          _player.resume();
+          _isPaused = false;
         } else {
           final player = OcarinaPlayer(
             asset: 'assets/audios/HouseOfBalloons.mp3',
