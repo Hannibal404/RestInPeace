@@ -1,9 +1,14 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:ocarina/ocarina.dart';
 
 import '../constants.dart';
 
@@ -13,6 +18,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  OcarinaPlayer _player = OcarinaPlayer(
+    asset: 'assets/audios/HouseOfBalloons.mp3',
+    loop: true,
+    volume: 0.8,
+  );
+  bool _isPlaying = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -157,14 +169,26 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget getPlaceWidget2(imagePath) {
     return GestureDetector(
-      onTap: () {
-        ///For going on next screen
-        Navigator.push(
-            context,
-            MaterialPageRoute(
+      onTap: () async {
+        final player = OcarinaPlayer(
+          asset: 'assets/audios/HouseOfBalloons.mp3',
+          loop: true,
+        );
 
-                ///Send image path as we have setted it as tag of hero
-                builder: (context) => HomeScreen()));
+        setState(() {
+          _player = player;
+        });
+        await _player.load();
+        if (!_isPlaying) {
+          _isPlaying = true;
+          _player.play();
+          print("Yes");
+        } else {
+          _isPlaying = false;
+          _player.pause();
+
+          print("No");
+        }
       },
       child: Container(
           decoration: BoxDecoration(
@@ -330,5 +354,88 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           )),
     );
+  }
+}
+
+class PlayerWidget extends StatelessWidget {
+  final OcarinaPlayer player;
+  final VoidCallback onBack;
+
+  PlayerWidget({this.player, this.onBack});
+
+  @override
+  Widget build(_) {
+    return FutureBuilder(
+        future: player.load(),
+        builder: (ctx, snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.waiting:
+            case ConnectionState.none:
+            case ConnectionState.active:
+              return Text("Loading player");
+            case ConnectionState.done:
+              if (snapshot.hasError) {
+                return Text("Error loading player");
+              }
+              return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    RaisedButton(
+                        child: Text("Play"),
+                        onPressed: () async {
+                          await player.play();
+                        }),
+                    RaisedButton(
+                        child: Text("Stop"),
+                        onPressed: () {
+                          player.stop();
+                        }),
+                    RaisedButton(
+                        child: Text("Pause"),
+                        onPressed: () {
+                          player.pause();
+                        }),
+                    RaisedButton(
+                        child: Text("Resume"),
+                        onPressed: () {
+                          player.resume();
+                        }),
+                    RaisedButton(
+                        child: Text("Seek to 5 secs"),
+                        onPressed: () {
+                          player.seek(Duration(seconds: 5));
+                        }),
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                      Text("Volume"),
+                      RaisedButton(
+                          child: Text("0.2"),
+                          onPressed: () {
+                            player.updateVolume(0.2);
+                          }),
+                      RaisedButton(
+                          child: Text("0.5"),
+                          onPressed: () {
+                            player.updateVolume(0.5);
+                          }),
+                      RaisedButton(
+                          child: Text("1.0"),
+                          onPressed: () {
+                            player.updateVolume(1.0);
+                          }),
+                    ]),
+                    RaisedButton(
+                        child: Text("Dispose"),
+                        onPressed: () async {
+                          await player.dispose();
+                        }),
+                    RaisedButton(
+                        child: Text("Go Back"),
+                        onPressed: () async {
+                          onBack?.call();
+                        }),
+                  ]);
+          }
+          return Container();
+        });
   }
 }
