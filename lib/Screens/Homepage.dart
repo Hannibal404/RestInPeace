@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:audioplayers/audioplayers.dart';
+// import 'package:audioplayers/audioplayers.dart';
 import 'package:ocarina/ocarina.dart';
 
 import '../constants.dart';
@@ -170,24 +170,25 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget getPlaceWidget2(imagePath) {
     return GestureDetector(
       onTap: () async {
-        final player = OcarinaPlayer(
-          asset: 'assets/audios/HouseOfBalloons.mp3',
-          loop: true,
-        );
+        if (_isPlaying) {
+          _isPlaying = false;
+          _player.stop();
+          print("No");
+          print(_isPlaying);
+        } else {
+          final player = OcarinaPlayer(
+            asset: 'assets/audios/HouseOfBalloons.mp3',
+            loop: true,
+          );
 
-        setState(() {
-          _player = player;
-        });
-        await _player.load();
-        if (!_isPlaying) {
+          setState(() {
+            _player = player;
+          });
+          await _player.load();
           _isPlaying = true;
           _player.play();
           print("Yes");
-        } else {
-          _isPlaying = false;
-          _player.pause();
-
-          print("No");
+          print(_isPlaying);
         }
       },
       child: Container(
