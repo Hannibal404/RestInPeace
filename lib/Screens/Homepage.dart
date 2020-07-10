@@ -4,6 +4,9 @@ import 'dart:io';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_auth/Screens/Meditation/main_screen.dart';
+import 'package:flutter_auth/Screens/Sleep/sleep_screen.dart';
+import 'package:flutter_auth/Screens/Yoga/yoga.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -118,7 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
             MaterialPageRoute(
 
                 ///Send image path as we have setted it as tag of hero
-                builder: (context) => HomeScreen()));
+                builder: (context) => MainScreen()));
       },
       child: Container(
           decoration: BoxDecoration(
@@ -171,29 +174,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget getPlaceWidget2(imagePath) {
     return GestureDetector(
       onTap: () async {
-        if (_isPlaying && !_isPaused) {
-          _isPaused = true;
-          _player.pause();
-          print("No");
-          print(_isPlaying);
-        } else if (_isPlaying && _isPaused) {
-          _player.resume();
-          _isPaused = false;
-        } else {
-          final player = OcarinaPlayer(
-            asset: 'assets/audios/HouseOfBalloons.mp3',
-            loop: true,
-          );
-
-          setState(() {
-            _player = player;
-          });
-          await _player.load();
-          _isPlaying = true;
-          _player.play();
-          print("Yes");
-          print(_isPlaying);
-        }
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => SleepScreen()));
       },
       child: Container(
           decoration: BoxDecoration(
@@ -248,11 +230,9 @@ class _HomeScreenState extends State<HomeScreen> {
       onTap: () {
         ///For going on next screen
         Navigator.push(
-            context,
-            MaterialPageRoute(
+            context, MaterialPageRoute(builder: (context) => YogaPage()));
 
-                ///Send image path as we have setted it as tag of hero
-                builder: (context) => HomeScreen()));
+        ///Send image path as we have setted it as tag of hero
       },
       child: Container(
           decoration: BoxDecoration(
