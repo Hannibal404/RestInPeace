@@ -1,21 +1,21 @@
-import 'dart:async';
-import 'dart:io';
-
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth/Screens/Meditation/main_screen.dart';
 import 'package:flutter_auth/Screens/Sleep/sleep_screen.dart';
-import 'package:flutter_auth/Screens/Yoga/yoga.dart';
+import 'package:flutter_auth/Screens/Yoga/poses.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 // import 'package:audioplayers/audioplayers.dart';
 import 'package:ocarina/ocarina.dart';
 
 import '../constants.dart';
+import '../main.dart';
+import 'Yoga/inference.dart';
 
 class HomeScreen extends StatefulWidget {
+  final List<CameraDescription> cameras;
+  const HomeScreen({this.cameras});
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -28,6 +28,16 @@ class _HomeScreenState extends State<HomeScreen> {
   );
   bool _isPlaying = false;
   bool _isPaused = false;
+  String greeting() {
+    var hour = DateTime.now().hour;
+    if (hour < 12) {
+      return 'Good Morning !';
+    }
+    if (hour < 17) {
+      return 'Good Afternoon !';
+    }
+    return 'Good Evening !';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,9 +59,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Good Morning!",
+                          greeting(),
                           style: GoogleFonts.playfairDisplay(
-                              color: AppColors.darkTextColor,
+                              color: Colors.white,
                               fontWeight: FontWeight.bold,
                               fontSize: 36),
                         )
@@ -94,13 +104,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                   children: [
                     ///Lets make container for each elements
-                    getPlaceWidget("assets/5.svg").withGridPlacement(
+                    getPlaceWidget("assets/5.png").withGridPlacement(
                         rowStart: 0, columnStart: 0, rowSpan: 2),
-                    getPlaceWidget2("assets/2.svg").withGridPlacement(
+                    getPlaceWidget2("assets/2.png").withGridPlacement(
                         rowStart: 2, columnStart: 0, rowSpan: 1),
-                    getPlaceWidget3("assets/4.svg").withGridPlacement(
+                    getPlaceWidget3("assets/4.png").withGridPlacement(
                         rowStart: 0, columnStart: 1, rowSpan: 1),
-                    getPlaceWidget4("assets/3.svg").withGridPlacement(
+                    getPlaceWidget4("assets/3.png").withGridPlacement(
                         rowStart: 1, columnStart: 1, rowSpan: 2),
                   ],
                 ),
@@ -139,10 +149,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 ///For hero animation on route transition
                 tag: imagePath,
                 child: ClipRRect(
-                  child: SvgPicture.asset(
-                    imagePath,
-                    fit: BoxFit.cover,
-                  ),
+                  child: Container(
+                      decoration: BoxDecoration(
+                          color: Color(0xFF162447),
+                          image: DecorationImage(
+                              image: AssetImage(imagePath),
+                              fit: BoxFit.contain))),
                   borderRadius: BorderRadius.circular(20),
                 ),
               ),
@@ -150,7 +162,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ///For rating and title
               Positioned(
                 top: 2,
-                left: 16,
+                left: 45,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -158,7 +170,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       "Meditation",
                       style: GoogleFonts.poppins(
                           fontSize: 18,
-                          color: Colors.black,
+                          color: Colors.white,
                           fontWeight: FontWeight.w500),
                     ),
 
@@ -193,10 +205,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 ///For hero animation on route transition
                 tag: imagePath,
                 child: ClipRRect(
-                  child: SvgPicture.asset(
-                    imagePath,
-                    fit: BoxFit.cover,
-                  ),
+                  child: Container(
+                      decoration: BoxDecoration(
+                          color: Color(0xFF162447),
+                          image: DecorationImage(
+                              image: AssetImage(imagePath),
+                              fit: BoxFit.contain))),
                   borderRadius: BorderRadius.circular(20),
                 ),
               ),
@@ -204,7 +218,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ///For rating and title
               Positioned(
                 top: 2,
-                left: 60,
+                left: 72,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -212,7 +226,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       "Sleep",
                       style: GoogleFonts.poppins(
                           fontSize: 18,
-                          color: Colors.black,
+                          color: Colors.white,
                           fontWeight: FontWeight.w500),
                     ),
 
@@ -227,10 +241,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget getPlaceWidget3(imagePath) {
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
+        // Either the permission was already granted before or the user just granted it.
+
         ///For going on next screen
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => YogaPage()));
+        Navigator.pushNamed(context, '/poses');
 
         ///Send image path as we have setted it as tag of hero
       },
@@ -250,10 +265,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 ///For hero animation on route transition
                 tag: imagePath,
                 child: ClipRRect(
-                  child: SvgPicture.asset(
-                    imagePath,
-                    fit: BoxFit.cover,
-                  ),
+                  child: Container(
+                      decoration: BoxDecoration(
+                          color: Color(0xFF162447),
+                          image: DecorationImage(
+                              image: AssetImage(imagePath),
+                              fit: BoxFit.contain))),
                   borderRadius: BorderRadius.circular(20),
                 ),
               ),
@@ -261,7 +278,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ///For rating and title
               Positioned(
                 top: 2,
-                left: 60,
+                left: 70,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -269,7 +286,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       "Yoga",
                       style: GoogleFonts.poppins(
                           fontSize: 18,
-                          color: Colors.black,
+                          color: Colors.white,
                           fontWeight: FontWeight.w500),
                     ),
 
@@ -309,10 +326,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 ///For hero animation on route transition
                 tag: imagePath,
                 child: ClipRRect(
-                  child: SvgPicture.asset(
-                    imagePath,
-                    fit: BoxFit.cover,
-                  ),
+                  child: Container(
+                      decoration: BoxDecoration(
+                          color: Color(0xFF162447),
+                          image: DecorationImage(
+                              image: AssetImage(imagePath),
+                              fit: BoxFit.contain))),
                   borderRadius: BorderRadius.circular(20),
                 ),
               ),
@@ -320,7 +339,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ///For rating and title
               Positioned(
                 top: 2,
-                left: 60,
+                left: 70,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -328,7 +347,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       "Relax",
                       style: GoogleFonts.poppins(
                           fontSize: 18,
-                          color: Colors.black,
+                          color: Colors.white,
                           fontWeight: FontWeight.w500),
                     ),
 
@@ -338,6 +357,20 @@ class _HomeScreenState extends State<HomeScreen> {
               )
             ],
           )),
+    );
+  }
+
+  void _onSelect(BuildContext context, String customModelName) async {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => InferencePage(
+          cameras: cameras,
+          title: customModelName,
+          model: "assets/models/posenet_mv1_075_float_from_checkpoints.tflite",
+          customModel: customModelName,
+        ),
+      ),
     );
   }
 }

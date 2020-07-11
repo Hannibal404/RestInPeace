@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 // The app's main accent colour
-const Color accent = Color(0xFF6F35A5);
+const Color accent = Color(0xFF162447);
 
 // The accent for light themes
-const Color lightAccent = Color(0xFF6F35A5);
+const Color lightAccent = Color(0xFF162447);
 
 // The primary background color for dark mode;
 // Inversely this is the foreground color for light mode
@@ -31,7 +31,7 @@ final lightTheme = ThemeData(
     elevation: 0.0,
   ),
   canvasColor: lightSurface,
-  accentColor: Color(0xFF6F35A5),
+  accentColor: Color(0xFF162447),
   splashColor: Colors.transparent,
   iconTheme: IconThemeData(color: bgDark),
   buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.accent),
@@ -61,7 +61,7 @@ final lightTheme = ThemeData(
       color: bgDark,
     ),
     headline3: GoogleFonts.montserrat(
-      color: bgDark,
+      color: Colors.white,
       fontWeight: FontWeight.w500,
     ),
     bodyText2: GoogleFonts.varelaRound(
@@ -112,7 +112,7 @@ final darkTheme = ThemeData(
       color: fgDark,
     ),
     headline3: GoogleFonts.montserrat(
-      color: accent,
+      color: Colors.white,
       fontWeight: FontWeight.w500,
     ),
     bodyText2: GoogleFonts.varelaRound(

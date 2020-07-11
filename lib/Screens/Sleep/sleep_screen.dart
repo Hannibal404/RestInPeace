@@ -3,18 +3,9 @@ import 'package:flutter/cupertino.dart' as cupertino;
 import 'package:flutter_auth/Screens/Sleep/city_sound.dart';
 import 'package:flutter_auth/Screens/Sleep/rain_sounds.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_auth/constants/preset_timers.dart';
-import 'package:flutter_auth/constants/theme.dart';
-import 'package:flutter_auth/constants/ui.dart';
 import 'package:flutter_auth/data/settings.dart';
-import 'package:flutter_auth/generated/l10n.dart';
-import 'package:flutter_auth/pages_routes.dart';
-import 'package:flutter_auth/Screens/Meditation/meditation_screen.dart';
 import 'package:flutter_auth/widgets/settings_card.dart';
 import 'package:provider/provider.dart';
-import 'package:styled_widget/styled_widget.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import 'forest_sound.dart';
 import 'meditating_sound.dart';

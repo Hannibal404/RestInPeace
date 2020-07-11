@@ -163,6 +163,7 @@ class _LoginBodyState extends State<LoginBody> {
             ),
             RoundedButton(
               text: "LOGIN",
+              color: Colors.deepPurple,
               press: () {
                 Navigator.pop(context, {
                   "email": _controllerEmail,

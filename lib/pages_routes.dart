@@ -28,7 +28,7 @@ class PageRoutes {
     );
   }
 
-  static Route<T> fade<T>(PageBuilder page, {int milliseconds = 1800}) {
+  static Route<T> fade<T>(PageBuilder page, {int milliseconds = 400}) {
     return PageRouteBuilder<T>(
       transitionDuration: Duration(milliseconds: milliseconds),
       pageBuilder: (context, animation, secondaryAnimation) => page(),

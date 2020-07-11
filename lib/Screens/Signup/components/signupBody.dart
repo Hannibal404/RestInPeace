@@ -160,6 +160,7 @@ class _SignupBodyState extends State<SignupBody> {
             ),
             RoundedButton(
               text: "SIGNUP",
+              color: Colors.deepPurple,
               press: () {
                 _handleSignUp(_controllerEmail, _controllerPassword)
                     .then((FirebaseUser user) => print(user))

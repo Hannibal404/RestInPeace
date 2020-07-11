@@ -186,7 +186,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(68.0),
                       ),
-                      color: Color(0xFF6F35A5),
+                      color: Color(0xFF162447),
                       onPressed: () {
                         Navigator.of(context).push(PageRoutes.fade(
                             () => MeditationScreen(),
