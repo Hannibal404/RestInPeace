@@ -5,6 +5,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_auth/data/settings.dart';
 import 'package:flutter_auth/widgets/settings_card.dart';
 import 'package:provider/provider.dart';
+import 'package:ocarina/ocarina.dart';
 
 class RainScreen extends StatefulWidget {
   RainScreen({this.startingAnimation = false, Key key}) : super(key: key);
@@ -19,12 +20,76 @@ class RainScreen extends StatefulWidget {
 class _MainScreenState extends State<RainScreen> with TickerProviderStateMixin {
   bool playSounds;
   bool isZenMode;
+  bool _isPlaying = false;
   Duration _presetDuration;
 
   AnimationController _scaffold;
   AnimationController _logo;
   Animation<Offset> _animation;
   Animation<Offset> _logoAnimation;
+
+  final sounds = [
+    'Light Rain',
+    'Normal Rain',
+    'Ocean Rain',
+    'Rain on Leaves',
+    'Thunder Rain',
+    'Rain Water',
+  ];
+
+  final soundMap = {
+    1: 'assets/audios/rain_light.mp3',
+    2: 'assets/audios/rain_normal.mp3',
+    3: 'assets/audios/rain_ocean.mp3',
+    4: 'assets/audios/rain_on_leaves.mp3',
+    5: 'assets/audios/rain_thunders.mp3',
+    6: 'assets/audios/rain_water.mp3',
+  };
+
+  Map<int, bool> _isPlayingIndex = {
+    1: false,
+    2: false,
+    3: false,
+    4: false,
+    5: false,
+    6: false,
+  };
+
+  OcarinaPlayer _player = OcarinaPlayer(
+    asset: 'assets/audios/rain_light.mp3',
+    loop: true,
+    volume: 1,
+  );
+
+  play(int idx) async {
+    if (_isPlayingIndex[idx + 1]) {
+      _player.stop();
+      _isPlaying = false;
+      _isPlayingIndex[idx + 1] = false;
+      _player.dispose();
+      setState(() {});
+    } else {
+      if (_isPlaying) {
+        _player.stop();
+      }
+      for (int i = 1; i <= 6; i++) {
+        _isPlayingIndex[i] = false;
+      }
+      final player = OcarinaPlayer(
+        asset: soundMap[idx + 1],
+        loop: true,
+        volume: 1,
+      );
+      setState(() {
+        _player = player;
+      });
+      await _player.load();
+      _isPlaying = true;
+      _isPlayingIndex[idx + 1] = true;
+      _player.play();
+      print(_isPlaying);
+    }
+  }
 
   @override
   void initState() {
@@ -102,109 +167,29 @@ class _MainScreenState extends State<RainScreen> with TickerProviderStateMixin {
                 Expanded(
                   flex: 10,
                   child: Container(
-                    // padding: EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Column(
-                      children: <Widget>[
-                        cupertino.GestureDetector(
-                          onTap: () async {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SleepScreen()));
-                          },
-                          child: SettingsCard(
-                            start: true,
-                            title: Text(
-                              'Light Rain',
-                              style: Theme.of(context).textTheme.subtitle1,
+                    height: cupertino.MediaQuery.of(context).size.height * 0.7,
+                    child: ListView.builder(
+                        itemCount: 6,
+                        itemBuilder: (BuildContext ctxt, int idx) {
+                          print(idx);
+                          return cupertino.GestureDetector(
+                            onTap: () {
+                              play(idx);
+                            }, //Airplane
+                            child: SettingsCard(
+                              start: idx == 0 ? true : false,
+                              end: idx == 5 ? true : false,
+                              title: Text(
+                                sounds[idx],
+                                style: Theme.of(context).textTheme.subtitle1,
+                              ),
+                              leading: Icon(Ionicons.ios_musical_note),
+                              trailing: _isPlayingIndex[idx + 1]
+                                  ? Icon(Ionicons.ios_pause)
+                                  : Icon(Ionicons.ios_play),
                             ),
-                            leading: Icon(Ionicons.ios_musical_note),
-                            trailing: Icon(Ionicons.ios_play),
-                          ),
-                        ),
-                        cupertino.GestureDetector(
-                          onTap: () async {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SleepScreen()));
-                          },
-                          child: SettingsCard(
-                            title: Text(
-                              'Normal Rain',
-                              style: Theme.of(context).textTheme.subtitle1,
-                            ),
-                            leading: Icon(Ionicons.ios_musical_note),
-                            trailing: Icon(Ionicons.ios_play),
-                          ),
-                        ),
-                        cupertino.GestureDetector(
-                          onTap: () async {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SleepScreen()));
-                          },
-                          child: SettingsCard(
-                            title: Text(
-                              'Ocean Rain',
-                              style: Theme.of(context).textTheme.subtitle1,
-                            ),
-                            leading: Icon(Ionicons.ios_musical_note),
-                            trailing: Icon(Ionicons.ios_play),
-                          ),
-                        ),
-                        cupertino.GestureDetector(
-                          onTap: () async {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SleepScreen()));
-                          },
-                          child: SettingsCard(
-                            title: Text(
-                              'Rain on Leaves',
-                              style: Theme.of(context).textTheme.subtitle1,
-                            ),
-                            leading: Icon(Ionicons.ios_musical_note),
-                            trailing: Icon(Ionicons.ios_play),
-                          ),
-                        ),
-                        cupertino.GestureDetector(
-                          onTap: () async {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SleepScreen()));
-                          },
-                          child: SettingsCard(
-                            title: Text(
-                              'Thunder Rain',
-                              style: Theme.of(context).textTheme.subtitle1,
-                            ),
-                            leading: Icon(Ionicons.ios_musical_note),
-                            trailing: Icon(Ionicons.ios_play),
-                          ),
-                        ),
-                        cupertino.GestureDetector(
-                          onTap: () async {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SleepScreen()));
-                          },
-                          child: SettingsCard(
-                            end: true,
-                            title: Text(
-                              'Rain Water',
-                              style: Theme.of(context).textTheme.subtitle1,
-                            ),
-                            leading: Icon(Ionicons.ios_musical_note),
-                            trailing: Icon(Ionicons.ios_play),
-                          ),
-                        ),
-                      ],
-                    ),
+                          );
+                        }),
                   ),
                 ),
               ],
