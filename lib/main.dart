@@ -2,13 +2,16 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_auth/Screens/Welcome/welcome_screen.dart';
 import 'package:flutter_auth/Screens/Yoga/poses.dart';
+import 'package:flutter_auth/Screens/Report/report.dart';
+
 import 'package:flutter_auth/pages_routes.dart';
 import 'package:flutter_auth/utils/utils.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:flutter/material.dart';
+import 'Screens/Onboarding/onboard_model.dart';
 import 'constants/theme.dart';
 import 'constants/ui.dart';
 import 'data/settings.dart';
@@ -61,18 +64,24 @@ class MyApp extends StatelessWidget {
           );
         },
         title: appTitle,
+
         theme: lightTheme,
         darkTheme: darkTheme,
         themeMode: ThemeMode.dark,
         // ignore: missing_return
         onGenerateRoute: (settings) {
           if (settings.name == '/') {
-            return PageRoutes.fade(() => WelcomeScreen());
+            // ignore: missing_required_param
+            return PageRoutes.fade(() => Onboard());
           }
           if (settings.name == '/poses') {
             return PageRoutes.fade(() => Poses(
                   cameras: cameras,
                 ));
+          }
+          if (settings.name == '/mainPage') {
+            // ignore: missing_required_param
+            return PageRoutes.fade(() => WelcomeScreen());
           }
         },
       ),

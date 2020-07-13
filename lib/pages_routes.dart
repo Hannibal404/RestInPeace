@@ -1,6 +1,3 @@
-// Lifted from
-// blog.gskinner.com/archives/2020/03/flutter-simplify-your-pageroutes.html
-
 import 'package:flutter/material.dart';
 
 typedef Widget PageBuilder();

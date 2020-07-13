@@ -11,6 +11,7 @@ import 'package:ocarina/ocarina.dart';
 
 import '../constants.dart';
 import '../main.dart';
+import 'Report/report.dart';
 import 'Yoga/inference.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -308,7 +309,7 @@ class _HomeScreenState extends State<HomeScreen> {
             MaterialPageRoute(
 
                 ///Send image path as we have setted it as tag of hero
-                builder: (context) => HomeScreen()));
+                builder: (context) => LineChartSample2()));
       },
       child: Container(
           decoration: BoxDecoration(
