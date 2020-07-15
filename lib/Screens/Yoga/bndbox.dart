@@ -104,7 +104,7 @@ class BndBox extends StatelessWidget {
               style: TextStyle(
                 fontSize: 50,
                 fontWeight: FontWeight.bold,
-                color: Colors.green,
+                color: Colors.white,
               ),
             ),
           ),
@@ -118,7 +118,7 @@ class BndBox extends StatelessWidget {
               percent: _counter,
               center: Text("${(_counter * 100).toStringAsFixed(1)} %"),
               linearStrokeCap: LinearStrokeCap.roundAll,
-              progressColor: Colors.green,
+              progressColor: Colors.white,
             ),
           ),
         ],

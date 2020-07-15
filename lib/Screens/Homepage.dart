@@ -13,6 +13,7 @@ import '../constants.dart';
 import '../main.dart';
 import 'Report/report.dart';
 import 'Yoga/inference.dart';
+import 'Yoga/scale_route.dart';
 
 class HomeScreen extends StatefulWidget {
   final List<CameraDescription> cameras;
@@ -242,14 +243,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget getPlaceWidget3(imagePath) {
     return GestureDetector(
-      onTap: () async {
-        // Either the permission was already granted before or the user just granted it.
-
-        ///For going on next screen
-        Navigator.pushNamed(context, '/poses');
-
-        ///Send image path as we have setted it as tag of hero
-      },
+      onTap: () => _onPoseSelect(context, 'Yoga'),
       child: Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
@@ -361,100 +355,19 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  void _onSelect(BuildContext context, String customModelName) async {
+  void _onPoseSelect(
+    BuildContext context,
+    String title,
+  ) async {
     Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (context) => InferencePage(
+      ScaleRoute(
+        page: Poses(
           cameras: cameras,
-          title: customModelName,
+          title: title,
           model: "assets/models/posenet_mv1_075_float_from_checkpoints.tflite",
-          customModel: customModelName,
         ),
       ),
     );
-  }
-}
-
-class PlayerWidget extends StatelessWidget {
-  final OcarinaPlayer player;
-  final VoidCallback onBack;
-
-  PlayerWidget({this.player, this.onBack});
-
-  @override
-  Widget build(_) {
-    return FutureBuilder(
-        future: player.load(),
-        builder: (ctx, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.waiting:
-            case ConnectionState.none:
-            case ConnectionState.active:
-              return Text("Loading player");
-            case ConnectionState.done:
-              if (snapshot.hasError) {
-                return Text("Error loading player");
-              }
-              return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    RaisedButton(
-                        child: Text("Play"),
-                        onPressed: () async {
-                          await player.play();
-                        }),
-                    RaisedButton(
-                        child: Text("Stop"),
-                        onPressed: () {
-                          player.stop();
-                        }),
-                    RaisedButton(
-                        child: Text("Pause"),
-                        onPressed: () {
-                          player.pause();
-                        }),
-                    RaisedButton(
-                        child: Text("Resume"),
-                        onPressed: () {
-                          player.resume();
-                        }),
-                    RaisedButton(
-                        child: Text("Seek to 5 secs"),
-                        onPressed: () {
-                          player.seek(Duration(seconds: 5));
-                        }),
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      Text("Volume"),
-                      RaisedButton(
-                          child: Text("0.2"),
-                          onPressed: () {
-                            player.updateVolume(0.2);
-                          }),
-                      RaisedButton(
-                          child: Text("0.5"),
-                          onPressed: () {
-                            player.updateVolume(0.5);
-                          }),
-                      RaisedButton(
-                          child: Text("1.0"),
-                          onPressed: () {
-                            player.updateVolume(1.0);
-                          }),
-                    ]),
-                    RaisedButton(
-                        child: Text("Dispose"),
-                        onPressed: () async {
-                          await player.dispose();
-                        }),
-                    RaisedButton(
-                        child: Text("Go Back"),
-                        onPressed: () async {
-                          onBack?.call();
-                        }),
-                  ]);
-          }
-          return Container();
-        });
   }
 }
