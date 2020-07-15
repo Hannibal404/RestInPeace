@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:core';
 
-import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:audioplayer/audioplayer.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_auth/generated/l10n.dart';
@@ -12,6 +12,7 @@ import 'package:flutter_auth/Screens/Meditation/main_screen.dart';
 import 'package:flutter_auth/widgets/nash_breathe.dart';
 import 'package:flutter_auth/widgets/countdown_circle.dart';
 import 'package:styled_widget/styled_widget.dart';
+import 'package:ocarina/ocarina.dart';
 
 /// This is the class that is responsible for keeping a timer.
 /// It can either display a simple breathe animation, if [zenMode] is enabled
@@ -39,13 +40,14 @@ class _TimerCountdown extends State<TimerCountdown> {
   String _display = 'Be at peace';
 
   // Play a sound
-  void _playSound() {
+  void _playSound() async {
     if (widget.playSounds) {
-      final assetsAudioPlayer = AssetsAudioPlayer();
-      assetsAudioPlayer.open(
-        Audio('assets/audios/gong.mp3'),
-        autoStart: true,
+      final _player = OcarinaPlayer(
+        asset: 'assets/audios/gong.mp3',
+        volume: 1,
       );
+      await _player.load();
+      _player.play();
     }
   }
 
