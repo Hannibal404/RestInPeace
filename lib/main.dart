@@ -1,11 +1,11 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_auth/Screens/Welcome/welcome_screen.dart';
-import 'package:flutter_auth/Screens/Yoga/poses.dart';
-import 'package:flutter_auth/Screens/Report/report.dart';
+import 'package:yogaApp/Screens/Welcome/welcome_screen.dart';
+import 'package:yogaApp/Screens/Yoga/poses.dart';
+import 'package:yogaApp/Screens/Report/report.dart';
 
-import 'package:flutter_auth/pages_routes.dart';
-import 'package:flutter_auth/utils/utils.dart';
+import 'package:yogaApp/pages_routes.dart';
+import 'package:yogaApp/utils/utils.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';

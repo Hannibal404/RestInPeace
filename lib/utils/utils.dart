@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_auth/data/quote.dart';
+import 'package:yogaApp/data/quote.dart';
 
 /// Loads the licenses and attributions used by this project
 void loadLicenses() {

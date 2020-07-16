@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_auth/constants/constants.dart';
-import 'package:flutter_auth/model/slider.dart';
+import 'package:yogaApp/constants/constants.dart';
+import 'package:yogaApp/model/slider.dart';
 
 class SlideItem extends StatelessWidget {
   final int index;

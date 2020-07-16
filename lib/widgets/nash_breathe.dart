@@ -1,7 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:flutter_auth/utils/utils.dart';
+import 'package:yogaApp/utils/utils.dart';
 import 'package:tinycolor/tinycolor.dart';
 
 class CupertinoBreathe extends StatefulWidget {

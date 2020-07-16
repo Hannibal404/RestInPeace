@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_auth/constants/theme.dart';
+import 'package:yogaApp/constants/theme.dart';
 import 'package:tinycolor/tinycolor.dart';
 
 class CountdownCircle extends StatefulWidget {
