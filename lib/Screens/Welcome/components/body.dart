@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_auth/Screens/Homepage.dart';
-import 'package:flutter_auth/Screens/Welcome/components/background.dart';
-import 'package:flutter_auth/components/rounded_button.dart';
-import 'package:flutter_auth/constants.dart';
+import 'package:yogaApp/Screens/Homepage.dart';
+import 'package:yogaApp/Screens/Welcome/components/background.dart';
+import 'package:yogaApp/components/rounded_button.dart';
+import 'package:yogaApp/constants.dart';
 import 'package:flutter_svg/svg.dart';
 
 class Body extends StatelessWidget {

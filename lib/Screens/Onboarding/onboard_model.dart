@@ -1,6 +1,6 @@
 import 'package:fancy_on_boarding/fancy_on_boarding.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_auth/Screens/Welcome/welcome_screen.dart';
+import 'package:yogaApp/Screens/Welcome/welcome_screen.dart';
 
 class Onboard extends StatefulWidget {
   Onboard({Key key, this.title}) : super(key: key);

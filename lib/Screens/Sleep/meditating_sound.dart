@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart' as cupertino;
-import 'package:flutter_auth/Screens/Sleep/sleep_screen.dart';
+import 'package:yogaApp/Screens/Sleep/sleep_screen.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:flutter_auth/data/settings.dart';
-import 'package:flutter_auth/widgets/settings_card.dart';
+import 'package:yogaApp/data/settings.dart';
+import 'package:yogaApp/widgets/settings_card.dart';
 import 'package:provider/provider.dart';
 import 'package:ocarina/ocarina.dart';
 

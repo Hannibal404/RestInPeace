@@ -1,6 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_auth/Screens/Welcome/components/body.dart';
+import 'package:yogaApp/Screens/Welcome/components/body.dart';
 
 class WelcomeScreen extends StatelessWidget {
   final List<CameraDescription> cameras;

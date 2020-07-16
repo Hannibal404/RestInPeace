@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_auth/data/settings.dart';
-import 'package:flutter_auth/widgets/timer_countdown.dart';
+import 'package:yogaApp/data/settings.dart';
+import 'package:yogaApp/widgets/timer_countdown.dart';
 import 'package:provider/provider.dart';
 
 class MeditationScreen extends StatelessWidget {

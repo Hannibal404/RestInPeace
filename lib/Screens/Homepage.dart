@@ -1,9 +1,9 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_auth/Screens/Meditation/main_screen.dart';
-import 'package:flutter_auth/Screens/Sleep/sleep_screen.dart';
-import 'package:flutter_auth/Screens/Yoga/poses.dart';
+import 'package:yogaApp/Screens/Meditation/main_screen.dart';
+import 'package:yogaApp/Screens/Sleep/sleep_screen.dart';
+import 'package:yogaApp/Screens/Yoga/poses.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:google_fonts/google_fonts.dart';
 // import 'package:audioplayers/audioplayers.dart';

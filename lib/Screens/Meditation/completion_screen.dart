@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_auth/constants/theme.dart';
-import 'package:flutter_auth/data/quote.dart';
-import 'package:flutter_auth/generated/l10n.dart';
-import 'package:flutter_auth/pages_routes.dart';
-import 'package:flutter_auth/Screens/Meditation/main_screen.dart';
-import 'package:flutter_auth/utils/utils.dart';
+import 'package:yogaApp/constants/theme.dart';
+import 'package:yogaApp/data/quote.dart';
+import 'package:yogaApp/generated/l10n.dart';
+import 'package:yogaApp/pages_routes.dart';
+import 'package:yogaApp/Screens/Meditation/main_screen.dart';
+import 'package:yogaApp/utils/utils.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 class CompletionScreen extends StatelessWidget {

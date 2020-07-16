@@ -2,8 +2,8 @@ import 'dart:math';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:tflite/tflite.dart';
-import 'package:flutter_auth/screens/yoga/bndbox.dart';
-import 'package:flutter_auth/screens/yoga/camera.dart';
+import 'package:yogaApp/screens/yoga/renderer.dart';
+import 'package:yogaApp/screens/yoga/camera.dart';
 
 class InferencePage extends StatefulWidget {
   final List<CameraDescription> cameras;

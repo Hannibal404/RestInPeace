@@ -1,7 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:flutter_auth/screens/yoga/inference.dart';
+import 'package:yogaApp/screens/yoga/inference.dart';
 
 class Poses extends StatelessWidget {
   final List<CameraDescription> cameras;
@@ -30,18 +29,32 @@ class Poses extends StatelessWidget {
                 mainAxisSpacing: 15.0,
                 childAspectRatio: 0.8,
                 children: <Widget>[
+                  _buildCard('Trikonasana', 'assets/Trikonasana.png', false,
+                      false, context),
                   _buildCard(
-                      'Natarajasana', 'assets/yoga.png', false, false, context),
+                      'Bakasana', 'assets/Bakasana.png', false, false, context),
+                  _buildCard(' Bhujangasana', 'assets/Bhujangasana.png', false,
+                      false, context),
+                  _buildCard('Dhanurasana', 'assets/Dhanurasana.png', false,
+                      false, context),
                   _buildCard(
-                      'Sukhasna', 'assets/yoga1.png', false, false, context),
-                  _buildCard(' Vrikshasana', 'assets/yoga2.png', false, false,
+                      'Halasana', 'assets/Halasana.png', false, false, context),
+                  _buildCard('Mayurasana', 'assets/Mayurasana.png', false,
+                      false, context),
+                  _buildCard('Padhastasana', 'assets/Padhastasana.png', false,
+                      false, context),
+                  _buildCard('Sarvangasana', 'assets/Sarvangasana.png', false,
+                      false, context),
+                  _buildCard('Sirsasana', 'assets/Sirsasana.png', false, false,
+                      context),
+                  _buildCard('Sukhasana', 'assets/Sukhasana.png', false, false,
                       context),
                   _buildCard(
-                      'Anjaneasana', 'assets/yoga3.png', false, false, context),
-                  _buildCard(
-                      'Utkatasana', 'assets/yoga4.png', false, false, context),
-                  _buildCard('Virabhadrasana', 'assets/yoga7.png', false, false,
+                      'Tadasana', 'assets/Tadasana.png', false, false, context),
+                  _buildCard('Ustrasana', 'assets/Ustrasana.png', false, false,
                       context),
+                  _buildCard('Vrikshasana', 'assets/Vrikshasana.png', false,
+                      false, context),
                 ],
               )),
           SizedBox(height: 15.0)
