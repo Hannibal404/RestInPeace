@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_auth/constants/preset_timers.dart';
+import 'package:yogaApp/constants/preset_timers.dart';
 
 /// This class holds state that initializes values required in [MeditationScreen]
 class MeditationModel extends ChangeNotifier {

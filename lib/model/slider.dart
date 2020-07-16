@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_auth/constants/constants.dart';
+import 'package:yogaApp/constants/constants.dart';
 
 class Slider {
   final String sliderImageUrl;
